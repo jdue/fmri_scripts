@@ -1,5 +1,5 @@
 function fs_cleanup(subject_dir, keep)
-% Remove intermediate files and keep only
+% Remove intermediate files in the directories 'run...'. Keep only
 % 
 % bold.nii
 % rp_*.txt

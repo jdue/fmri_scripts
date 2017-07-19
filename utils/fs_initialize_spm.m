@@ -6,4 +6,4 @@ spm('defaults','fMRI');
 spm_get_defaults('cmdline',true);
 spm_jobman('initcfg');
 
-fprintf('Done\n\n')
+fprintf('Done\n')
