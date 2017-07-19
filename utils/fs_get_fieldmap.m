@@ -2,7 +2,7 @@ function [phase, magnitude, vdm] = fs_get_fieldmap(subject_dir)
 
 fmri_dir = fs_getd_fmri(subject_dir);
 
-fieldmap_dir = fullfile(fmri_dir, 'FieldMap');
+fieldmap_dir = fullfile(fmri_dir, 'field_map');
 
 phase = fs_fullpath(fieldmap_dir, 'phase.nii');
 magnitude = fs_fullpath(fieldmap_dir, 'mag_*.nii');

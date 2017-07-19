@@ -1,5 +1,8 @@
 function fs_concat_3d(cfg_file, subject_dir)
 
+fprintf('Concatenating volumes\n')
+fs_print_bar();
+
 cfg = fs_get_config(cfg_file, 'concat');
 
 rd = fs_getd_runs(subject_dir);

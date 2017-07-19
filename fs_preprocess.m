@@ -1,5 +1,8 @@
 function fs_preprocess(cfg_file, subject_dir)
 
+fprintf('Preprocessing\n')
+fs_print_bar();
+
 cfg = fs_get_config(cfg_file, 'preproc');
 
 % Prepare for Preprocessing

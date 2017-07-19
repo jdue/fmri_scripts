@@ -27,7 +27,7 @@ for i = 1:length(keep)
 end
 
 for i = 1:length(rd)
-    files = cellstr(ls(rd{i}));
+    files = fs_fullpath(rd{i},'*');
     files = files(3:end);
 
     for j = 1:length(keep)
@@ -40,6 +40,6 @@ for i = 1:length(rd)
     end
     % Delete
     for k = 1:length(files)
-        delete(fullfile(rd{i}, files{k}))
+        delete(files{k});
     end
 end
