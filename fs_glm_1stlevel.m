@@ -1,9 +1,9 @@
-function fs_glm_1stlevel(cfg_file, subject_dir)
+function fs_glm_1stlevel(cfg, subject_dir)
 
 fprintf('GLM 1st Level\n')
 fs_print_bar();
 
-cfg = fs_get_config(cfg_file, 'glm1');
+cfg = fs_get_config(cfg, 'glm1');
 
 % PREPARATION
 % =========================================================================

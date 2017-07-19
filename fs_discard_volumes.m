@@ -1,6 +1,6 @@
-function fs_discard_volumes(cfg_file, subject_dir)
+function fs_discard_volumes(cfg, subject_dir)
 
-cfg = fs_get_config(cfg_file, 'discard');
+cfg = fs_get_config(cfg, 'discard');
 
 rd = fs_getd_runs(subject_dir);
 

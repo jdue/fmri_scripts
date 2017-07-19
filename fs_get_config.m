@@ -1,4 +1,6 @@
-function cfg = fs_get_config(file, field)
+function cfg = fs_get_config(cfg, field)
+% cfg : configuration struct or an .m file defining a struct named 'cfg'.
+% 
 % Configuration file for specifying most common options including
 %   * preprocessing
 %   * 1st level GLM statistics
@@ -9,8 +11,10 @@ if nargin < 2
 end
 
 % Get options from the configuration file
-run(file)
-assert(exist('cfg', 'var')==1, 'Configuration file must contain variable "cfg".')
+if isa(cfg, 'char') && exist(cfg, 'file')
+    run(cfg)
+end
+assert(isa(cfg, 'struct'), '"cfg" must be either a struct or file containing a struct named "cfg".');
 
 if ~isempty(field)
     % Return only the requested field

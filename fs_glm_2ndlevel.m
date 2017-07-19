@@ -1,4 +1,4 @@
-function fs_glm_2ndlevel(cfg_file, root_dir)
+function fs_glm_2ndlevel(cfg, root_dir)
 % 
 % root_dir : directory containing the subjects
 % cfg file with name and outdir
@@ -10,7 +10,7 @@ function fs_glm_2ndlevel(cfg_file, root_dir)
 % =========================================================================
 %con_name = 'Faces > Scrambled';
 
-cfg = fs_get_config(cfg_file, 'glm2');
+cfg = fs_get_config(cfg, 'glm2');
 
 fs_initialize_spm()
 for i = 1:length(cfg.con)

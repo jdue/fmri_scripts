@@ -1,9 +1,9 @@
-function fs_preprocess(cfg_file, subject_dir)
+function fs_preprocess(cfg, subject_dir)
 
 fprintf('Preprocessing\n')
 fs_print_bar();
 
-cfg = fs_get_config(cfg_file, 'preproc');
+cfg = fs_get_config(cfg, 'preproc');
 
 % Prepare for Preprocessing
 % =========================================================================

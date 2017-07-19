@@ -1,4 +1,4 @@
-function fs_wavelet_despike(cfg_file, subject_dir)
+function fs_wavelet_despike(cfg, subject_dir)
 % 
 % To use this function:
 % 
@@ -11,7 +11,7 @@ function fs_wavelet_despike(cfg_file, subject_dir)
 %     - prefix_noise.nii.gz  - the noise time seies removed during despike
 %     - prefix_SP.txt        - the spike percentage time series
 
-cfg = fs_get_config(cfg_file, 'wavelet');
+cfg = fs_get_config(cfg, 'wavelet');
 
 try limitRAM = cfg.limitRAM; catch; limitRAM = 10; end
 
