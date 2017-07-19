@@ -14,7 +14,6 @@ if isa(keep, 'char') && strcmp(keep, 'all')
 end
 keep = cell(keep); % Ensure cell
 
-
 rd = fs_getd_runs(subject_dir);
 
 % Ensure bold.nii is kept
@@ -29,17 +28,21 @@ end
 for i = 1:length(rd)
     files = fs_fullpath(rd{i},'*');
     files = files(3:end);
+    for k = 1:length(files)
+        [~, name, ext] = fileparts(files{k});
+        files{k} = [name ext];
+    end
 
     for j = 1:length(keep)
         if isempty(regexp(keep{j}, '[*^]', 'ONCE'))
-            files(ismember(files,keep{j})) = [];
+            files(ismember(files, keep{j})) = [];
         else
-            x = regexp(files,keep{j});
+            x = regexp(files, keep{j});
             files(~cellfun(@isempty, x)) = [];
         end
     end
     % Delete
     for k = 1:length(files)
-        delete(files{k});
+        delete(fullfile(rd{i}, files{k}));
     end
 end

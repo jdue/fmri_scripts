@@ -7,7 +7,7 @@ cfg = fs_get_config(cfg_file, 'glm1');
 
 % PREPARATION
 % =========================================================================
-[bold, nruns] = fs_get_bold(subject_dir, '^dsw.*.nii');
+[bold, nruns] = fs_get_bold(subject_dir, '^sw.*.nii');
 tdefs = fs_get_trial_defs(subject_dir);
 [~, level1_dir] = fs_setup_analysis_dirs(subject_dir);
 nvr = fs_rp24x(subject_dir);
