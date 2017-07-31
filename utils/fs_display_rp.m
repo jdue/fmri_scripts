@@ -11,6 +11,7 @@ for i = 1:length(bold)
     fprintf('Press any key to continue.\n')
     waitforbuttonpress; % press a key or button to display rp for ith subject  
 end
+close
 
 function display_rp(q)
 % Display motion parameters and get maximum translation in all directions
