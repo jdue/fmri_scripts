@@ -1,11 +1,14 @@
 function fs_discard_volumes(cfg, subject_dir)
 
+fprintf('Discarding volumes\n')
+fs_print_bar();
+
 cfg = fs_get_config(cfg, 'discard');
 
 rd = fs_getd_runs(subject_dir);
 
 for i = 1:length(rd)
-    fprintf('Discarding first %i volumes of run %i/%i\n', cfg.n, i, length(rd))
+    fprintf('Discarding first %i volumes of run %i of %i\n', cfg.n, i, length(rd))
     discard_volumes(fullfile(rd{i}, 'bold.nii'), cfg.n, cfg.Nmin);
 end
 

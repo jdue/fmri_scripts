@@ -1,9 +1,9 @@
-function vdm = fs_estimate_vdm(cfg, subject_dir)
+function vdm = fs_estimate_unwarp(cfg, subject_dir)
 
 % Options
 try te_short = cfg.te_short; catch; error('Must specify short TE'); end
 try te_long = cfg.te_long; catch; error('Must specify long TE'); end
-try BPPPE = cfg.BPPPE; catch; error('Must specify BandwidthPerPixelPhaseEncode'); end
+try tert = cfg.tert; catch; error('Must specify total EPI readout time'); end
 try blip_dir = cfg.blip_dir; catch; blip_dir = -1; end
 
 % Get BOLD images. Keep only the first volume
@@ -22,9 +22,6 @@ else
     mag = mags(1);
 end
 
-% Total EPI readout time
-tert = 1/BPPPE*1e3;
-
 % Get FieldMap T1 template
 spm_dir = spm('dir');
 fm_template = fullfile(spm_dir, 'toolbox', 'FieldMap', 'T1.nii');
@@ -32,7 +29,6 @@ fm_template = fullfile(spm_dir, 'toolbox', 'FieldMap', 'T1.nii');
 fprintf('Estimating voxel displacement maps using the following parameters\n')
 fprintf('TE (short)                   : %5.2f ms\n', te_short)
 fprintf('TE (long)                    : %5.2f ms\n', te_long)
-fprintf('BandwidthPerPixelPhaseEncode : %5.2f Hz\n', BPPPE)
 fprintf('Total EPI readout time       : %5.2f ms\n', tert)
 fprintf('\n')
 

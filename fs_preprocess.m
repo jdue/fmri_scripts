@@ -21,8 +21,8 @@ fs_initialize_spm()
 %fprintf('Preprocessing %s\n', subject)
 
 % Get voxel displacement maps
-if isfield(cfg,'vdm')
-    vdm = fs_estimate_vdm(cfg.vdm, subject_dir);
+if isfield(cfg,'unwarp')
+    vdm = fs_estimate_unwarp(cfg.unwarp, subject_dir);
 end
 
 % Slice time correction 

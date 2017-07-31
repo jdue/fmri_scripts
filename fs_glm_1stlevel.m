@@ -7,7 +7,7 @@ cfg = fs_get_config(cfg, 'glm1');
 
 % PREPARATION
 % =========================================================================
-[bold, nruns] = fs_get_bold(subject_dir, '^sw.*.nii');
+[bold, nruns] = fs_get_bold(subject_dir, '^dsw.*.nii');
 tdefs = fs_get_trial_defs(subject_dir);
 [~, level1_dir] = fs_setup_analysis_dirs(subject_dir);
 nvr = fs_rp24x(subject_dir);
@@ -47,6 +47,11 @@ SPM = nuis2iG(SPM);
 save(f, 'SPM');
 fprintf('Done')
 
+if ~isfield(cfg, 'con')
+    cfg.con = fs_make_contrasts(SPM);
+    cfg.sessrep = 'none';
+end
+
 % Model estimation
 mb = [];
 mb{1}.spm.stats.fmri_est.spmmat(1) = cellstr(f);
@@ -65,34 +70,12 @@ for i = 1:length(cfg.con)
     if all(size(cfg.con(i).weights)>1)
         mb{2}.spm.stats.con.consess{i}.fcon.name = cfg.con(i).name;
         mb{2}.spm.stats.con.consess{i}.fcon.weights = cfg.con(i).weights;
-        mb{2}.spm.stats.con.consess{i}.fcon.sessrep = 'replsc';
+        mb{2}.spm.stats.con.consess{i}.fcon.sessrep = cfg.sessrep;
     else
         mb{2}.spm.stats.con.consess{i}.tcon.name = cfg.con(i).name;
         mb{2}.spm.stats.con.consess{i}.tcon.weights = cfg.con(i).weights;
-        mb{2}.spm.stats.con.consess{i}.tcon.sessrep = 'replsc';
+        mb{2}.spm.stats.con.consess{i}.tcon.sessrep = cfg.sessrep; %'replsc';
     end
 end
-% 
-% mb{2}.spm.stats.con.consess{1}.fcon.name = 'Effects of Interest';
-% mb{2}.spm.stats.con.consess{1}.fcon.weights = [1 0 0
-%                                                         0 1 0
-%                                                         0 0 1];
-% mb{2}.spm.stats.con.consess{1}.fcon.sessrep = 'replsc';
-% mb{2}.spm.stats.con.consess{2}.tcon.name = 'Familiar Faces';
-% mb{2}.spm.stats.con.consess{2}.tcon.weights = [1 0 0];
-% mb{2}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
-% mb{2}.spm.stats.con.consess{3}.tcon.name = 'Unfamiliar Faces';
-% mb{2}.spm.stats.con.consess{3}.tcon.weights = [0 1 0];
-% mb{2}.spm.stats.con.consess{3}.tcon.sessrep = 'replsc';
-% mb{2}.spm.stats.con.consess{4}.tcon.name = 'Scrambled Faces';
-% mb{2}.spm.stats.con.consess{4}.tcon.weights = [0 0 1];
-% mb{2}.spm.stats.con.consess{4}.tcon.sessrep = 'replsc';
-% mb{2}.spm.stats.con.consess{5}.tcon.name = 'Faces > Scrambled';
-% mb{2}.spm.stats.con.consess{5}.tcon.weights = [0.5 0.5 -1];
-% mb{2}.spm.stats.con.consess{5}.tcon.sessrep = 'replsc';
-% mb{2}.spm.stats.con.consess{6}.tcon.name = 'Familiar > Unfamiliar';
-% mb{2}.spm.stats.con.consess{6}.tcon.weights = [1 -1 0];
-% mb{2}.spm.stats.con.consess{6}.tcon.sessrep = 'replsc';
-
 mb{2}.spm.stats.con.delete = 0;
 spm_jobman('run',mb);

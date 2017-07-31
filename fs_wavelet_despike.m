@@ -28,7 +28,8 @@ for i = 1:length(rd)
     [~, name, ext] = fileparts(bold);
     name = strcat('d', name);
     WaveletDespike(bold, name, 'LimitRAM', limitRAM);
-
+    WaveletDespike(bold, name, 'LimitRAM', limitRAM, 'threshold', 25);
+    %WaveletDespike(bold, name, 'LimitRAM', limitRAM, 'threshold', 15, 'chsearch','conservative');
     % Outputs
     wds = [name '_wds.nii.gz' ];    % despiked time series
     %noise = [name '_noise.nii.gz']; % noise components removed
