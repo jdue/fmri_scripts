@@ -1,3 +1,17 @@
+function fs_display_rp(sd)
+% Display realignment parameters as estimated by SPM.
+
+[~,subject] = fileparts(sd);
+bold = fs_getd_runs(sd);
+fprintf('Displaying realignment parameters for subject %s\n\n', subject)
+for i = 1:length(bold)
+    fprintf('Run %i of %i\n',i, length(bold))
+    q = load(spm_select('FPList',fullfile(bold{i}),'^rp_.*.txt'));
+    display_rp(q);
+    fprintf('Press any key to continue.\n')
+    waitforbuttonpress; % press a key or button to display rp for ith subject  
+end
+
 function display_rp(q)
 % Display motion parameters and get maximum translation in all directions
 % and maximum rotation around all axes.
